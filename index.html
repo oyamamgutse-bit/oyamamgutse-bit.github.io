@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB CORPS — Websites for local businesses</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#121212;
+    --panel:#1a1a1a;
+    --panel-2:#212121;
+    --amber:#f2b705;
+    --clay:#e4572e;
+    --paper:#f5f1e8;
+    --muted:#a49d92;
+    --line:rgba(245,241,232,0.12);
+    --radius:2px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    font-family:'Work Sans', sans-serif;
+    font-size:16px;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{
+    font-family:'Archivo Black', sans-serif;
+    font-weight:400;
+    margin:0;
+    line-height:1.05;
+  }
+  a{color:inherit;text-decoration:none;}
+  img,svg{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+  .stripe{
+    height:10px;
+    background:repeating-linear-gradient(115deg, var(--amber) 0 22px, var(--ink) 22px 44px);
+  }
+
+  /* NAV */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(18,18,18,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 28px;max-width:1120px;margin:0 auto;
+  }
+  .logo{
+    font-family:'Archivo Black', sans-serif;
+    font-size:20px;
+    letter-spacing:0.5px;
+  }
+  .logo span{color:var(--amber);}
+  .nav-links{display:flex;gap:32px;align-items:center;}
+  .nav-links a{font-size:15px;font-weight:500;color:var(--muted);transition:color .15s;}
+  .nav-links a:hover{color:var(--paper);}
+  .nav-cta{
+    background:var(--amber);color:var(--ink);
+    padding:10px 20px;border-radius:var(--radius);
+    font-weight:600;font-size:14px;
+  }
+  .nav-cta:hover{background:#ffce33;}
+  .burger{display:none;background:none;border:0;color:var(--paper);font-size:24px;cursor:pointer;}
+
+  /* HERO */
+  .hero{padding:96px 0 80px;}
+  .hero-eyebrow{
+    color:var(--clay);font-weight:600;font-size:14px;margin-bottom:18px;
+  }
+  .hero h1{
+    font-size:clamp(38px, 6vw, 68px);
+    max-width:16ch;
+    letter-spacing:-0.5px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--amber);
+  }
+  .hero p{
+    max-width:52ch;color:var(--muted);font-size:18px;margin-top:24px;
+  }
+  .hero-actions{display:flex;gap:16px;margin-top:36px;flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--amber);color:var(--ink);
+    padding:15px 28px;border-radius:var(--radius);
+    font-weight:700;font-size:15px;
+  }
+  .btn-primary:hover{background:#ffce33;}
+  .btn-ghost{
+    border:1px solid var(--line);color:var(--paper);
+    padding:15px 28px;border-radius:var(--radius);
+    font-weight:600;font-size:15px;
+  }
+  .btn-ghost:hover{border-color:var(--paper);}
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;margin-top:72px;padding-top:36px;border-top:1px solid var(--line);
+    max-width:640px;
+  }
+  .hero-stats .num{font-family:'Archivo Black';font-size:30px;color:var(--amber);}
+  .hero-stats .label{color:var(--muted);font-size:14px;margin-top:6px;}
+
+  /* SECTION HEADS */
+  .section{padding:88px 0;border-top:1px solid var(--line);}
+  .section-head{max-width:60ch;margin-bottom:56px;}
+  .section-head h2{font-size:clamp(28px,4vw,40px);}
+  .section-head p{color:var(--muted);margin-top:16px;font-size:17px;}
+
+  /* SERVICES */
+  .services-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .service-card{background:var(--ink);padding:32px 26px;}
+  .service-card .icon{
+    width:40px;height:40px;margin-bottom:22px;color:var(--amber);
+  }
+  .service-card h3{font-family:'Work Sans';font-weight:700;font-size:17px;margin-bottom:10px;}
+  .service-card p{color:var(--muted);font-size:14.5px;}
+
+  /* WORK / PORTFOLIO */
+  .work-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+  .work-card{
+    background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);
+    overflow:hidden;
+  }
+  .mock-browser{padding:12px;background:var(--panel-2);}
+  .mock-dots{display:flex;gap:6px;margin-bottom:10px;}
+  .mock-dots span{width:8px;height:8px;border-radius:50%;background:var(--line);}
+  .mock-body{height:150px;border-radius:2px;position:relative;overflow:hidden;}
+  .mock-body .bar{position:absolute;top:0;left:0;right:0;height:26px;}
+  .mock-body .box{position:absolute;border-radius:2px;}
+  .work-info{padding:22px 22px 26px;}
+  .work-tag{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:8px;}
+  .work-info h3{font-family:'Work Sans';font-weight:700;font-size:18px;margin-bottom:8px;}
+  .work-info p{color:var(--muted);font-size:14.5px;}
+
+  /* PROCESS */
+  .process-list{display:flex;flex-direction:column;}
+  .process-item{
+    display:grid;grid-template-columns:80px 1fr;gap:28px;
+    padding:32px 0;border-top:1px solid var(--line);
+  }
+  .process-item:last-child{border-bottom:1px solid var(--line);}
+  .process-num{font-family:'Archivo Black';font-size:34px;color:var(--clay);}
+  .process-item h3{font-family:'Work Sans';font-weight:700;font-size:19px;margin-bottom:8px;}
+  .process-item p{color:var(--muted);font-size:15px;max-width:56ch;}
+
+  /* CONTACT */
+  .contact{
+    background:var(--panel);border-radius:var(--radius);
+    padding:64px 56px;display:grid;grid-template-columns:1.1fr 1fr;gap:56px;
+  }
+  .contact h2{font-size:clamp(26px,3.6vw,36px);max-width:14ch;}
+  .contact p{color:var(--muted);margin-top:18px;max-width:42ch;}
+  .contact-detail{margin-top:32px;}
+  .contact-detail .label{color:var(--muted);font-size:13px;font-weight:600;margin-bottom:4px;}
+  .contact-detail .value{font-size:17px;font-weight:600;}
+  .contact-detail{padding-bottom:16px;}
+  form{display:flex;flex-direction:column;gap:14px;}
+  input,textarea{
+    background:var(--ink);border:1px solid var(--line);color:var(--paper);
+    padding:14px 16px;border-radius:var(--radius);font-family:inherit;font-size:15px;
+  }
+  input:focus,textarea:focus{outline:2px solid var(--amber);outline-offset:0;border-color:transparent;}
+  textarea{resize:vertical;min-height:100px;}
+  form .btn-primary{border:0;cursor:pointer;margin-top:4px;}
+
+  footer{padding:40px 0;border-top:1px solid var(--line);}
+  .footer-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;}
+  .footer-row .logo{font-size:16px;}
+  footer p{color:var(--muted);font-size:13.5px;}
+
+  @media (max-width:860px){
+    .services-grid{grid-template-columns:repeat(2,1fr);}
+    .work-grid{grid-template-columns:1fr;}
+    .contact{grid-template-columns:1fr;padding:40px 26px;}
+    .hero-stats{grid-template-columns:repeat(3,1fr);}
+  }
+  @media (max-width:620px){
+    .nav-links{display:none;}
+    .burger{display:block;}
+    .services-grid{grid-template-columns:1fr;}
+    .hero{padding:64px 0 56px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">WEB<span>CORPS</span></div>
+    <div class="nav-links">
+      <a href="#services">Services</a>
+      <a href="#work">Work</a>
+      <a href="#process">Process</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Start a project</a>
+  </nav>
+</header>
+
+<div class="stripe"></div>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-eyebrow">Web design for local businesses</div>
+      <h1>Your business deserves a website as solid as <em>your work.</em></h1>
+      <p>WEB CORPS builds fast, no-nonsense websites for the plumbers, painters, decorators and food spots that keep local communities running — done properly, and priced for a small business.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Start your project</a>
+        <a href="#work" class="btn-ghost">See our work</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="num">48h</div>
+          <div class="label">First draft turnaround</div>
+        </div>
+        <div>
+          <div class="num">100%</div>
+          <div class="label">Mobile-ready sites</div>
+        </div>
+        <div>
+          <div class="num">2</div>
+          <div class="label">People, no middlemen</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="services">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Built for trades, not tech companies</h2>
+        <p>We know what a plumber's website needs to do is different from what a restaurant's does. Every site we build is shaped around how your customers actually find and contact you.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M14 7l3-3 3 3-3 3M14 7L4 17v3h3l10-10M14 7l3 3"/></svg>
+          <h3>Trade & service sites</h3>
+          <p>Plumbers, electricians, painters and decorators — a site that shows your work and makes it easy to get a quote.</p>
+        </div>
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 11h16M4 11a8 8 0 0116 0M4 11l1 9h14l1-9"/></svg>
+          <h3>Food & hospitality</h3>
+          <p>Menus, location, opening hours and a WhatsApp order button — everything a hungry customer needs, fast.</p>
+        </div>
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M5 12H1M23 12h-4M6 6l2.5 2.5M17.5 15.5L20 18M6 18l2.5-2.5M17.5 8.5L20 6"/><circle cx="12" cy="12" r="4"/></svg>
+          <h3>Care & maintenance</h3>
+          <p>Once it's live, we keep it live — updates, fixes and small changes without a call-out fee.</p>
+        </div>
+        <div class="service-card">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 19h16M7 19V9l5-5 5 5v10M10 19v-5h4v5"/></svg>
+          <h3>Basic branding</h3>
+          <p>Starting from scratch? We'll help pick colours, a simple logo mark and a name that sticks.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="work">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>A few example builds</h2>
+        <p>Sample projects showing the kind of sites we build for local businesses like yours.</p>
+      </div>
+      <div class="work-grid">
+        <div class="work-card">
+          <div class="mock-browser">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <div class="mock-body" style="background:#0d3b3e;">
+              <div class="bar" style="background:#0a2c2e;"></div>
+              <div class="box" style="top:44px;left:16px;width:70px;height:70px;background:#f2b705;"></div>
+              <div class="box" style="top:44px;left:96px;width:120px;height:14px;background:#e7f3f2;opacity:.85;"></div>
+              <div class="box" style="top:66px;left:96px;width:80px;height:10px;background:#e7f3f2;opacity:.5;"></div>
+              <div class="box" style="top:96px;left:96px;width:60px;height:18px;background:#f2b705;"></div>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-tag">TRADE &middot; PLUMBING</div>
+            <h3>Mzansi Plumbing Co.</h3>
+            <p>One-page site with a call-out request form, service area map and before/after job photos.</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="mock-browser">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <div class="mock-body" style="background:#3a2b1f;">
+              <div class="bar" style="background:#2a1e15;"></div>
+              <div class="box" style="top:40px;left:16px;width:200px;height:60px;background:#e4572e;opacity:.9;"></div>
+              <div class="box" style="top:112px;left:16px;width:58px;height:58px;background:#f5f1e8;opacity:.15;"></div>
+              <div class="box" style="top:112px;left:84px;width:58px;height:58px;background:#f5f1e8;opacity:.25;"></div>
+              <div class="box" style="top:112px;left:152px;width:58px;height:58px;background:#f5f1e8;opacity:.4;"></div>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-tag">TRADE &middot; PAINTING & DECOR</div>
+            <h3>ColourWorks Decorators</h3>
+            <p>A colour-led portfolio gallery organised by room type, with a simple project enquiry form.</p>
+          </div>
+        </div>
+        <div class="work-card">
+          <div class="mock-browser">
+            <div class="mock-dots"><span></span><span></span><span></span></div>
+            <div class="mock-body" style="background:#241a12;">
+              <div class="bar" style="background:#1a120c;"></div>
+              <div class="box" style="top:40px;left:16px;width:90px;height:90px;border-radius:50%;background:#f2b705;"></div>
+              <div class="box" style="top:52px;left:120px;width:96px;height:14px;background:#f5f1e8;opacity:.85;"></div>
+              <div class="box" style="top:74px;left:120px;width:70px;height:10px;background:#f5f1e8;opacity:.5;"></div>
+              <div class="box" style="top:96px;left:120px;width:50px;height:18px;background:#e4572e;"></div>
+            </div>
+          </div>
+          <div class="work-info">
+            <div class="work-tag">FOOD &middot; HOSPITALITY</div>
+            <h3>Mama Thandi's Kitchen</h3>
+            <p>Digital menu, daily specials and a one-tap WhatsApp ordering button for a home-run kitchen.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="process">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>How a project runs</h2>
+        <p>Four steps, start to finish. No jargon, no surprise invoices.</p>
+      </div>
+      <div class="process-list">
+        <div class="process-item">
+          <div class="process-num">01</div>
+          <div>
+            <h3>We chat about your business</h3>
+            <p>A short call or WhatsApp chat about what you do, who your customers are, and what you need the site to achieve.</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">02</div>
+          <div>
+            <h3>We design it</h3>
+            <p>You'll see a first draft within 48 hours, built around your services and the way your customers actually reach out.</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">03</div>
+          <div>
+            <h3>We build and refine</h3>
+            <p>We make it work properly on phones first, since that's how most of your customers will find you. Unlimited small revisions.</p>
+          </div>
+        </div>
+        <div class="process-item">
+          <div class="process-num">04</div>
+          <div>
+            <h3>We launch and stick around</h3>
+            <p>Your site goes live, and we stay on hand for updates — new photos, new prices, new services — whenever you need them.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="contact">
+    <div class="wrap">
+      <div class="contact">
+        <div>
+          <h2>Let's build your site.</h2>
+          <p>Tell us a bit about your business and what you need. We usually reply within a day.</p>
+          <div class="contact-detail">
+            <div class="label">Email</div>
+            <div class="value">oyamamgutse@gmail.com</div>
+          </div>
+          <div class="contact-detail">
+            <div class="label">Phone / WhatsApp</div>
+            <div class="value">+63 146 9459</div>
+          </div>
+          <div class="contact-detail">
+            <div class="label">Based in</div>
+            <div class="value">GQEBERHA</div>
+          </div>
+        </div>
+        <form onsubmit="event.preventDefault(); alert('Thanks — we\'ll be in touch soon. For now, email oyamamgutse@gmail.com directly.');">
+          <input type="text" placeholder="Your name" required>
+          <input type="text" placeholder="Business name" required>
+          <input type="email" placeholder="Email address" required>
+          <textarea placeholder="What do you need a website for?" required></textarea>
+          <button type="submit" class="btn-primary">Send enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-row">
+      <div class="logo">WEB<span>CORPS</span></div>
+      <p>&copy; 2026 WEB CORPS. Websites for local businesses across South Africa.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mobile nav: simple toggle (kept minimal, non-intrusive)
+  document.addEventListener('DOMContentLoaded', function(){
+    var burger = document.querySelector('.burger');
+  });
+</script>
+
+</body>
+</html>
